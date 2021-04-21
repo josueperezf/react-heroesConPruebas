@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { Redirect, useParams } from "react-router-dom";
 import { getHeroePorId } from '../../selectores/getHeroePorId';
-
+import { heroeImagenes } from '../../helpers/heroeImagenes';
 // el router nos envia parametros, entre ellos el match alli estan los parametros url
 //export const HeroeScreen = ({match}) => {
 // la siguiente linea obtiene el parametro usando match que el router envia a cada subcomponente
@@ -31,7 +31,9 @@ export const HeroeScreen = ({history}) => {
         <div className='row no-gutters'>
             <div className='col-4 col-md-4'>
                 <img
-                    src={`../assets/heroes/${id}.jpg`}
+                    //src={`../assets/heroes/${id}.jpg`} asi es de forma estatica
+                    // src={ heroeImagenes(`./dc-superman.jpg`).default }
+                    src={ heroeImagenes(`./${id}.jpg`).default }
                     alt={superhero}
                     className='img-thumbnail animate__animated animate__fadeInLeft'
                 />

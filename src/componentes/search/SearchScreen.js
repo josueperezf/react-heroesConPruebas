@@ -2,12 +2,13 @@ import React, { useMemo } from 'react';
 import { useForm } from '../../hooks/useForm';
 import { HeroeCard } from '../heroes/HeroeCard';
 import queryString from 'query-string';
-import { useLocation } from 'react-router';
+import { useNavigate, useLocation  } from 'react-router-dom';
 import { getHeroePorName } from '../../selectores/getHeroePorName';
 
-export const SearchScreen = ({history}) => {
+export const SearchScreen = () => {
     // para obtener los parametros url por get
-    const location = useLocation();
+    const location = useLocation()
+    const navigate = useNavigate();
     // se usa el plugin query-string que sirve para convertir en objeto todos los parametros que envien por url
     // recibe el query string, ejemplo ?q=abc, resultado seria {q=abc}
     //{ q = '' } hace que si la variable no se la enviaron por url, entonces coloquele de valor comillas vacias para q no quede undefined
@@ -28,7 +29,7 @@ export const SearchScreen = ({history}) => {
 
     const handleSearch =(e)=> {
         e.preventDefault();
-        history.push(`?q=${buscar}`);
+        navigate(`?q=${buscar}`);
     }
     return (
         <div>

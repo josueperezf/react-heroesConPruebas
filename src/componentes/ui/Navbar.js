@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link, NavLink, useHistory } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../auth/AuthContext';
 import { types } from '../../types/types';
 
@@ -9,14 +9,14 @@ export const Navbar = () => {
     // como navbar no esta en las opciones del router, no contamos con el history como parametro, para solucionar ello podemos
     // desde el DashboardRouter, pasarle como parametro la funcion history a nuestro navbar, y con ello navegar, pero no es la mejor opcion
     // la mejor opcion es usar el hook useHistory() que nos trae toda esta informacion sin estar pasando parametros a las funciones o componentes
-    const history = useHistory();
+    const navegate = useNavigate();
 
     const handleLogout = ()=>{
         // console.log('logout');
         dispatch({
             type:types.logout
         });
-        history.replace('/login');
+        navegate('/login');
     }
 
     return (
@@ -33,26 +33,20 @@ export const Navbar = () => {
                 <div className="navbar-nav">
 
                     <NavLink 
-                        activeClassName="active"
-                        className="nav-item nav-link" 
-                        exact
+                        className={ ({isActive}) => `nav-item nav-link ${ isActive ? 'active' : ''}` }
                         to="/marvel"
                     >
                         Marvel
                     </NavLink>
 
                     <NavLink 
-                        activeClassName="active"
-                        className="nav-item nav-link" 
-                        exact
+                        className={ ({isActive}) => `nav-item nav-link ${ isActive ? 'active' : ''}` }
                         to="/dc"
                     >
                         DC
                     </NavLink>
                     <NavLink 
-                        activeClassName="active"
-                        className="nav-item nav-link" 
-                        exact
+                        className={ ({isActive}) => `nav-item nav-link ${ isActive ? 'active' : ''}` }
                         to="/search"
                     >
                         Buscar

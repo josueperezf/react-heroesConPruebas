@@ -35,7 +35,7 @@ export const HeroeCard = ({
                                     {first_appearance}
                                 </small>
                             </p>
-                            <Link to={`./heroe/${id}`} >
+                            <Link to={`/heroe/${id}`} >
                                 Mas...
                             </Link>
                         </div>

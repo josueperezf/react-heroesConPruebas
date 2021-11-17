@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Redirect, useParams } from "react-router-dom";
+import { Navigate, useParams, useNavigate } from "react-router-dom";
 import { getHeroePorId } from '../../selectores/getHeroePorId';
 import { heroeImagenes } from '../../helpers/heroeImagenes';
 // el router nos envia parametros, entre ellos el match alli estan los parametros url
@@ -7,25 +7,28 @@ import { heroeImagenes } from '../../helpers/heroeImagenes';
 // la siguiente linea obtiene el parametro usando match que el router envia a cada subcomponente
 // const heroeId  = match.params['heroeId'];
 
-export const HeroeScreen = ({history}) => {
+export const HeroeScreen = () => {
     // la siguiente linea obtiene el parametro usando el hook 
     const {heroeId} = useParams();
+    const navigate = useNavigate();
     //const heroe = getHeroePorId(heroeId);
     // la siguiente linea es para que no cargue la data si el publisher contiene el mismo valor cuando alguien esta en esta ruta, va a otra y luego da atras
     const heroe = useMemo(() => getHeroePorId(heroeId), [heroeId]);
     // sino tiene un heroe, se debe salir
     if(!heroe ) {
-        return <Redirect to="/" />
+        return <Navigate  to="/" />
     }
     const {id,superhero,publisher,alter_ego,first_appearance,characters} = heroe;
     
     const handleReturn = ()=>{
         // si la persona tiene historial de navegacion, va al historial anterior
         // si no tiene historial lo manda a la raiz
-        if (history.length <= 2) {
-            history.push('/');
+        if (navigate.length <= 2) {
+            console.log('entro en el if');
+            navigate('/');
+            return;
         }
-        history.goBack();
+        navigate(-1);
     }
     return (
         <div className='row no-gutters'>

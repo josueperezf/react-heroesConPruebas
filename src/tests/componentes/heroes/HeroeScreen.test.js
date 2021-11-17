@@ -13,7 +13,7 @@ describe('Pruebas en <HeroeScreen/>',()=>{
     
     test('debe mostrar el componente redirect si no hay argumentos en el url', () => {
         const wrapper =  mount(
-                            <MemoryRouter initialEntries={['/hero']}>
+                            <MemoryRouter initialEntries={['/heroe']}>
                                 <HeroeScreen history={history} />
                             </MemoryRouter>
                             );
